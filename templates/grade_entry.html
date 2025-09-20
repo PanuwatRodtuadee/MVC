@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>กรอกเกรด</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background-color: #f0fff0; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
+    th { background-color: #e0ffe0; }
+    select, input { padding: 6px; }
+    button { margin-top: 10px; padding: 8px 16px; background-color: #007BFF; color: white; border: none; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h2>กรอกเกรดนักเรียน</h2>
+  <form method="GET">
+    <input name="student_id" placeholder="รหัสนักเรียน">
+    <button type="submit">ค้นหา</button>
+  </form>
+
+  {% if subjects %}
+    <form method="POST">
+      <input type="hidden" name="student_id" value="{{ student_id }}">
+      <table>
+        <tr><th>รหัสวิชา</th><th>เกรด</th></tr>
+        {% for subject in subjects %}
+          <tr>
+            <td>{{ subject.subject_id }}</td>
+            <td>
+              <select name="grade">
+                <option value="A">A</option>
+                <option value="B+">B+</option>
+                <option value="B">B</option>
+                <option value="C+">C+</option>
+                <option value="C">C</option>
+                <option value="D+">D+</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+              </select>
+              <input type="hidden" name="subject_id" value="{{ subject.subject_id }}">
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+      <button type="submit">บันทึกเกรด</button>
+    </form>
+  {% endif %}
+</body>
+</html>
