@@ -1,5 +1,6 @@
+from flask import render_template
 from controllers.students_controller import show_all_students
-def display_student_list():
+
+def admin_dashboard_view():
     students = show_all_students()
-    for s in students:
-        print(f"{s['first_name']} {s['last_name']} - {s['school']}")
+    return render_template("admin_dashboard.html", students=students)
